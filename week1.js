@@ -245,28 +245,46 @@
 // console.log(pangrams(sample2));
 
 // PERMUTING TWO ARRAYS (Given integer k and arrays A & B, determine if permutations for arrays exist where A[i] + B[i] >= k)
-function twoArrays(k, A, B) {
-  // Ascend sort A, Descend sort B to add lowest and highest possible values
-  const sortedA = A.sort((a, b) => a - b);
-  const sortedB = B.sort((a, b) => b - a);
-  // Check if sum of same-indexed numbers in each array is >= k. If not, return "NO"
-  for (let i = 0; i < A.length; i++) {
-    if (sortedA[i] + sortedB[i] < k) {
-      return "NO";
+// function twoArrays(k, A, B) {
+//   // Ascend sort A, Descend sort B to add lowest and highest possible values
+//   const sortedA = A.sort((a, b) => a - b);
+//   const sortedB = B.sort((a, b) => b - a);
+//   // Check if sum of same-indexed numbers in each array is >= k. If not, return "NO"
+//   for (let i = 0; i < A.length; i++) {
+//     if (sortedA[i] + sortedB[i] < k) {
+//       return "NO";
+//     }
+//   }
+//   return "YES";
+// }
+
+// const k = 10;
+// const A = [2, 1, 3];
+// const B = [7, 8, 9];
+// console.log(twoArrays(k, A, B));
+// const l = 5;
+// const C = [1, 2, 2, 1];
+// const D = [3, 3, 3, 4];
+// console.log(twoArrays(l, C, D));
+
+// SUBARRAY DIVISION 1 (given array s, return the number of subarrays of length m with an integer sum d)
+function birthday(s, d, m) {
+  let result = 0;
+  let init = 0;
+  // Iterate through s getting subarrays of m length
+  for (let i = 0; i < s.length - (m - 1); i++) {
+    let subarray = s.slice(i, i + m);
+    // If sum of subarray integers equals d, add to result
+    if (subarray.reduce((x, y) => x + y, init) == d) {
+      result++;
     }
   }
-  return "YES";
+  return result;
 }
 
-const k = 10;
-const A = [2, 1, 3];
-const B = [7, 8, 9];
-console.log(twoArrays(k, A, B));
-const l = 5;
-const C = [1, 2, 2, 1];
-const D = [3, 3, 3, 4];
-console.log(twoArrays(l, C, D));
-
-// SUBARRAY DIVISION 1
+const s = [2, 2, 1, 3, 2];
+const d = 4;
+const m = 2;
+console.log(birthday(s, d, m));
 
 // XOR STRINGS 2
