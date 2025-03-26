@@ -10,6 +10,7 @@
 // PERMUTING TWO ARRAYS
 // SUBARRAY DIVISION 1
 // XOR STRINGS 2
+// MOCK TEST
 
 // PLUS MINUS (print ratio to 6 decimal places of positive, negative, and zero integers in an array)
 // function plusMinus(arr) {
@@ -268,23 +269,72 @@
 // console.log(twoArrays(l, C, D));
 
 // SUBARRAY DIVISION 1 (given array s, return the number of subarrays of length m with an integer sum d)
-function birthday(s, d, m) {
-  let result = 0;
-  let init = 0;
-  // Iterate through s getting subarrays of m length
-  for (let i = 0; i < s.length - (m - 1); i++) {
-    let subarray = s.slice(i, i + m);
-    // If sum of subarray integers equals d, add to result
-    if (subarray.reduce((x, y) => x + y, init) == d) {
-      result++;
-    }
-  }
-  return result;
-}
+// function birthday(s, d, m) {
+//   let result = 0;
+//   let init = 0;
+//   // Iterate through s getting subarrays of m length
+//   for (let i = 0; i < s.length - (m - 1); i++) {
+//     let subarray = s.slice(i, i + m);
+//     // If sum of subarray integers equals d, add to result
+//     if (subarray.reduce((x, y) => x + y, init) == d) {
+//       result++;
+//     }
+//   }
+//   return result;
+// }
 
-const s = [2, 2, 1, 3, 2];
-const d = 4;
-const m = 2;
-console.log(birthday(s, d, m));
+// const s = [2, 2, 1, 3, 2];
+// const d = 4;
+// const m = 2;
+// console.log(birthday(s, d, m));
 
-// XOR STRINGS 2
+// XOR STRINGS 2 (Debug existing code, but JS problem was bugged. Solved in Python and Java 7 by correcting = / == issue)
+
+// MOCK TEST
+// 1. FIND THE MEDIAN (given array of odd length, sort and return middle-index value)
+
+// function findMedian(arr) {
+//   // Sort ascending
+//   const sortedArr = arr.sort((a, b) => a - b);
+//   // Get length to slice from array and leave single item in middle
+//   const trimLength = (arr.length - 1) / 2;
+//   return sortedArr.slice(trimLength, trimLength * -1)[0];
+// }
+// const arr = [5, 3, 1, 2, 4];
+// console.log(findMedian(arr));
+
+// 2. FLIPPING THE MATRIX (for square matrix of even length, and able to reverse rows and columns, return maximal sum of ints upper-left quadrant )
+// function flippingMatrix(matrix) {
+//   let n = matrix.length;
+//   let sum = 0;
+//   // Iterate through ints in upper left quadrant
+//   for (let i = 0; i < n / 2; i++) {
+//     for (let j = 0; j < n / 2; j++) {
+//       // Int can only be swapped with its X, Y, and XY inverses, get max value of these 4
+//       let quartet = [
+//         matrix[i][j],
+//         matrix[n - i - 1][j],
+//         matrix[n - i - 1][n - j - 1],
+//         matrix[i][n - j - 1],
+//       ];
+//       // Add max to sum
+//       sum = sum + Math.max(...quartet);
+//     }
+//   }
+//   return sum;
+// }
+// const matrix = [
+//   [112, 42, 83, 119],
+//   [56, 125, 56, 49],
+//   [15, 78, 101, 43],
+//   [62, 98, 114, 108],
+// ];
+
+// const matrix2 = [
+//   [107, 54, 128, 15],
+//   [12, 75, 110, 138],
+//   [100, 96, 34, 85],
+//   [75, 15, 28, 112],
+// ];
+// console.log(flippingMatrix(matrix));
+// console.log(flippingMatrix(matrix2));
