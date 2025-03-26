@@ -226,25 +226,46 @@
 // console.log(countingSort(arr));
 
 // PANGRAMS (determine if a string contains all letters A-Z, case insensitive)
-function pangrams(s) {
-  // Convert string to all lowercase and remove spaces, split to array
-  let stringToArray = s.toLowerCase().replace(/\s/g, "").split("");
-  // Iterate through ASCII codes a-z converted to letters.
-  // If not found, return "not pangram", else return "pangram"
-  for (let i = 97; i <= 122; i++) {
-    if (!stringToArray.find((letter) => letter == String.fromCharCode(i))) {
-      return "not pangram";
+// function pangrams(s) {
+//   // Convert string to all lowercase and remove spaces, split to array
+//   let stringToArray = s.toLowerCase().replace(/\s/g, "").split("");
+//   // Iterate through ASCII codes a-z converted to letters.
+//   // If not found, return "not pangram", else return "pangram"
+//   for (let i = 97; i <= 122; i++) {
+//     if (!stringToArray.find((letter) => letter == String.fromCharCode(i))) {
+//       return "not pangram";
+//     }
+//   }
+//   return "pangram";
+// }
+
+// const sample1 = "We promptly judged antique ivory buckles for the next prize";
+// const sample2 = "We promptly judged antique ivory buckles for the prize";
+// console.log(pangrams(sample1));
+// console.log(pangrams(sample2));
+
+// PERMUTING TWO ARRAYS (Given integer k and arrays A & B, determine if permutations for arrays exist where A[i] + B[i] >= k)
+function twoArrays(k, A, B) {
+  // Ascend sort A, Descend sort B to add lowest and highest possible values
+  const sortedA = A.sort((a, b) => a - b);
+  const sortedB = B.sort((a, b) => b - a);
+  // Check if sum of same-indexed numbers in each array is >= k. If not, return "NO"
+  for (let i = 0; i < A.length; i++) {
+    if (sortedA[i] + sortedB[i] < k) {
+      return "NO";
     }
   }
-  return "pangram";
+  return "YES";
 }
 
-const sample1 = "We promptly judged antique ivory buckles for the next prize";
-const sample2 = "We promptly judged antique ivory buckles for the prize";
-console.log(pangrams(sample1));
-console.log(pangrams(sample2));
-
-// PERMUTING TWO ARRAYS
+const k = 10;
+const A = [2, 1, 3];
+const B = [7, 8, 9];
+console.log(twoArrays(k, A, B));
+const l = 5;
+const C = [1, 2, 2, 1];
+const D = [3, 3, 3, 4];
+console.log(twoArrays(l, C, D));
 
 // SUBARRAY DIVISION 1
 
