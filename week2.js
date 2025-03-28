@@ -69,36 +69,54 @@
 // console.log(findZigZagSequence(a, n));
 
 // DRAWING BOOK
-function pageCount(n, p) {
-  let frontTurns = 0;
-  let foundTurn = 0;
-  // Set last page as odd number
-  let last = n;
-  if (n % 2 == 0) {
-    last = n + 1;
-  }
-  // Starting from 0, iterate by 2 ([0,1],[2,3])
-  // Count page turns and mark turn when p is found. Don't count after reaching last page!
-  for (let i = 0; i + 1 <= last; i = i + 2) {
-    if (i == p || i + 1 == p) {
-      foundTurn = frontTurns;
-    }
-    if (i + 1 < last) {
-      frontTurns++;
-    }
-  }
-  // P was found in fewer than half of all page turns, return that amount, else return difference
-  if (foundTurn <= (frontTurns - 1) / 2) {
-    return foundTurn;
-  } else {
-    return frontTurns - foundTurn;
-  }
-}
-const n = 5;
-const p = 4;
-console.log(pageCount(n, p));
+// function pageCount(n, p) {
+//   let frontTurns = 0;
+//   let foundTurn = 0;
+//   // Set last page as odd number
+//   let last = n;
+//   if (n % 2 == 0) {
+//     last = n + 1;
+//   }
+//   // Starting from 0, iterate by 2 ([0,1],[2,3])
+//   // Count page turns and mark turn when p is found. Don't count after reaching last page!
+//   for (let i = 0; i + 1 <= last; i = i + 2) {
+//     if (i == p || i + 1 == p) {
+//       foundTurn = frontTurns;
+//     }
+//     if (i + 1 < last) {
+//       frontTurns++;
+//     }
+//   }
+//   // P was found in fewer than half of all page turns, return that amount, else return difference
+//   if (foundTurn <= (frontTurns - 1) / 2) {
+//     return foundTurn;
+//   } else {
+//     return frontTurns - foundTurn;
+//   }
+// }
+// const n = 5;
+// const p = 4;
+// console.log(pageCount(n, p));
 
 // TOWER BREAKERS
+function towerBreakers(n, m) {
+  // If tower(s) are height 1, player 1 has no starting move and immediately loses
+  if (m == 1) {
+    return 2;
+  } else {
+    // If even number of towers, 2 can match 1 and win. If odd, 1 can take first tower of play, then match 2 until 2 is out of moves.
+    return n % 2 == 0 ? 2 : 1;
+  }
+}
+
+function altTowerBreakers(n, m) {
+  // Single line version: 2 wins with tower height 1 or even number of towers, else 1 wins
+  return m == 1 || n % 2 == 0 ? 2 : 1;
+}
+const n = 1;
+const m = 4;
+console.log(towerBreakers(n, m));
+console.log(altTowerBreakers(n, m));
 
 // CAESAR CIPHER
 
