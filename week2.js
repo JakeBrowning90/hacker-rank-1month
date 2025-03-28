@@ -98,27 +98,68 @@
 // const p = 4;
 // console.log(pageCount(n, p));
 
-// TOWER BREAKERS
-function towerBreakers(n, m) {
-  // If tower(s) are height 1, player 1 has no starting move and immediately loses
-  if (m == 1) {
-    return 2;
-  } else {
-    // If even number of towers, 2 can match 1 and win. If odd, 1 can take first tower of play, then match 2 until 2 is out of moves.
-    return n % 2 == 0 ? 2 : 1;
-  }
-}
+// TOWER BREAKERS (Given n towers of m height, 2 players can reduce a tower to height of y where (m & y = 0). First player with no valid moves (all towers at 1) loses.)
+// function towerBreakers(n, m) {
+//   // If tower(s) are height 1, player 1 has no starting move and immediately loses
+//   if (m == 1) {
+//     return 2;
+//   } else {
+//     // If even number of towers, 2 can match 1 and win. If odd, 1 can take first tower of play, then match 2 until 2 is out of moves.
+//     return n % 2 == 0 ? 2 : 1;
+//   }
+// }
 
-function altTowerBreakers(n, m) {
-  // Single line version: 2 wins with tower height 1 or even number of towers, else 1 wins
-  return m == 1 || n % 2 == 0 ? 2 : 1;
-}
-const n = 1;
-const m = 4;
-console.log(towerBreakers(n, m));
-console.log(altTowerBreakers(n, m));
+// function altTowerBreakers(n, m) {
+//   // Single line version: 2 wins with tower height 1 or even number of towers, else 1 wins
+//   return m == 1 || n % 2 == 0 ? 2 : 1;
+// }
+// const n = 1;
+// const m = 4;
+// console.log(towerBreakers(n, m));
+// console.log(altTowerBreakers(n, m));
 
 // CAESAR CIPHER
+function caesarCipher(s, k) {
+  // Split text into array
+  let array = s.split("");
+  // For each letter char, subtract from ASCII to get 0-25 index, add key, get modulo of 26, add ASCII back to get ciphered char.
+  for (let i = 0; i < array.length; i++) {
+    if (/[A-Z]/g.test(array[i])) {
+      array[i] = String.fromCharCode(
+        ((array[i].charCodeAt() - 65 + k) % 26) + 65
+      );
+    }
+    if (/[a-z]/g.test(array[i])) {
+      array[i] = String.fromCharCode(
+        ((array[i].charCodeAt() - 97 + k) % 26) + 97
+      );
+    }
+  }
+  return array.join("");
+}
+
+function altCaesarCipher(s, k) {
+  let result = "";
+  for (let i = 0; i < s.length; i++) {
+    let char = s[i];
+    if (char.match(/[a-z]/i)) {
+      const original = s.charCodeAt(i);
+      let encrypted;
+      if (65 <= original <= 90) {
+        encrypted = ((original - 65 + k) % 26) + 65;
+      } else if (97 <= original <= 122) {
+        encrypted = ((original - 97 + k) % 26) + 97;
+      }
+      char = String.fromCharCode(encrypted);
+    }
+    result += char;
+  }
+  return result;
+}
+
+s = "lcfd";
+k = 98;
+console.log(caesarCipher(s, k));
 
 // MAX MIN
 
