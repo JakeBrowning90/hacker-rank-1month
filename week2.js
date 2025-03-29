@@ -118,50 +118,74 @@
 // console.log(towerBreakers(n, m));
 // console.log(altTowerBreakers(n, m));
 
-// CAESAR CIPHER
-function caesarCipher(s, k) {
-  // Split text into array
-  let array = s.split("");
-  // For each letter char, subtract from ASCII to get 0-25 index, add key, get modulo of 26, add ASCII back to get ciphered char.
-  for (let i = 0; i < array.length; i++) {
-    if (/[A-Z]/g.test(array[i])) {
-      array[i] = String.fromCharCode(
-        ((array[i].charCodeAt() - 65 + k) % 26) + 65
-      );
+// CAESAR CIPHER (Encode string s by shifting each letter k spaces down the alphabet, wrapping as "Z" and preserving case)
+// function caesarCipher(s, k) {
+//   // Split text into array
+//   let array = s.split("");
+//   // For each letter char, subtract from ASCII to get 0-25 index, add key, get modulo of 26, add ASCII back to get ciphered char.
+//   for (let i = 0; i < array.length; i++) {
+//     if (/[A-Z]/g.test(array[i])) {
+//       array[i] = String.fromCharCode(
+//         ((array[i].charCodeAt() - 65 + k) % 26) + 65
+//       );
+//     }
+//     if (/[a-z]/g.test(array[i])) {
+//       array[i] = String.fromCharCode(
+//         ((array[i].charCodeAt() - 97 + k) % 26) + 97
+//       );
+//     }
+//   }
+//   return array.join("");
+// }
+
+// function altCaesarCipher(s, k) {
+//   let result = "";
+//   for (let i = 0; i < s.length; i++) {
+//     let char = s[i];
+//     if (char.match(/[a-z]/i)) {
+//       const original = s.charCodeAt(i);
+//       let encrypted;
+//       if (65 <= original <= 90) {
+//         encrypted = ((original - 65 + k) % 26) + 65;
+//       } else if (97 <= original <= 122) {
+//         encrypted = ((original - 97 + k) % 26) + 97;
+//       }
+//       char = String.fromCharCode(encrypted);
+//     }
+//     result += char;
+//   }
+//   return result;
+// }
+
+// s = "lcfd";
+// k = 98;
+// console.log(caesarCipher(s, k));
+
+// MAX MIN (Given array of integers, find permutation of k length with lowest difference between min and mx values)
+function maxMin(k, arr) {
+  // Sort array least to greatest to get permutations with lowest unfairness
+  arr.sort((a, b) => a - b);
+  // Get iterable min and max for permutations of length k
+  let permMin = 0;
+  let permMax = k - 1;
+  // Problem parameter
+  let min = 1000000000;
+  let diff;
+  // Iterate through min and max values of permutaions. If difference is lowest yet, set as min
+  while (permMax < arr.length) {
+    diff = arr[permMax] - arr[permMin];
+    if (diff < min) {
+      min = diff;
     }
-    if (/[a-z]/g.test(array[i])) {
-      array[i] = String.fromCharCode(
-        ((array[i].charCodeAt() - 97 + k) % 26) + 97
-      );
-    }
+    permMin++;
+    permMax++;
   }
-  return array.join("");
+  return min;
 }
 
-function altCaesarCipher(s, k) {
-  let result = "";
-  for (let i = 0; i < s.length; i++) {
-    let char = s[i];
-    if (char.match(/[a-z]/i)) {
-      const original = s.charCodeAt(i);
-      let encrypted;
-      if (65 <= original <= 90) {
-        encrypted = ((original - 65 + k) % 26) + 65;
-      } else if (97 <= original <= 122) {
-        encrypted = ((original - 97 + k) % 26) + 97;
-      }
-      char = String.fromCharCode(encrypted);
-    }
-    result += char;
-  }
-  return result;
-}
-
-s = "lcfd";
-k = 98;
-console.log(caesarCipher(s, k));
-
-// MAX MIN
+arr = [1, 2, 3, 4, 10, 20, 30, 40, 100, 200];
+k = 4;
+console.log(maxMin(k, arr));
 
 // DYNAMIC ARRAY
 
