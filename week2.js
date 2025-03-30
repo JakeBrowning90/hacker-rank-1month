@@ -211,7 +211,7 @@ function gridChallenge(grid) {
 const grid = ["abc", "hjk", "mpq", "rtv"];
 console.log(gridChallenge(grid));
 
-// PRIME DATES
+// PRIME DATES (Code not present in JS, corrections required in Leap Year if-statement, multiplying X to concat MM and YYYY, X%4 OR X%7, and set month counter to 1 after 12)
 
 // SHERLOCK AND ARRAY
 
