@@ -162,34 +162,54 @@
 // console.log(caesarCipher(s, k));
 
 // MAX MIN (Given array of integers, find permutation of k length with lowest difference between min and mx values)
-function maxMin(k, arr) {
-  // Sort array least to greatest to get permutations with lowest unfairness
-  arr.sort((a, b) => a - b);
-  // Get iterable min and max for permutations of length k
-  let permMin = 0;
-  let permMax = k - 1;
-  // Problem parameter
-  let min = 1000000000;
-  let diff;
-  // Iterate through min and max values of permutaions. If difference is lowest yet, set as min
-  while (permMax < arr.length) {
-    diff = arr[permMax] - arr[permMin];
-    if (diff < min) {
-      min = diff;
-    }
-    permMin++;
-    permMax++;
-  }
-  return min;
-}
+// function maxMin(k, arr) {
+//   // Sort array least to greatest to get permutations with lowest unfairness
+//   arr.sort((a, b) => a - b);
+//   // Get iterable min and max for permutations of length k
+//   let permMin = 0;
+//   let permMax = k - 1;
+//   // Problem parameter
+//   let min = 1000000000;
+//   let diff;
+//   // Iterate through min and max values of permutaions. If difference is lowest yet, set as min
+//   while (permMax < arr.length) {
+//     diff = arr[permMax] - arr[permMin];
+//     if (diff < min) {
+//       min = diff;
+//     }
+//     permMin++;
+//     permMax++;
+//   }
+//   return min;
+// }
 
-arr = [1, 2, 3, 4, 10, 20, 30, 40, 100, 200];
-k = 4;
-console.log(maxMin(k, arr));
+// arr = [1, 2, 3, 4, 10, 20, 30, 40, 100, 200];
+// k = 4;
+// console.log(maxMin(k, arr));
 
 // DYNAMIC ARRAY
 
-// GRID CHALLENGE
+// GRID CHALLENGE (given array of lower-case letter strings of equal length, sort strings into alphabetized rows, then determine if columns are alphabetical.)
+// NOTE: Problem description says "Square grid", but actually provides array of strings, with string length not always equal to array length)
+function gridChallenge(grid) {
+  // Convert each string ("row") into alphabetically sorted array)
+  for (let i = 0; i < grid.length; i++) {
+    grid[i] = grid[i].split("").sort();
+  }
+  // Iterate through all but last row. If char code in next row, same column is lesser, return "NO". Else return "YES"
+  for (let i = 0; i < grid.length - 1; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      let currentChar = grid[i][j].charCodeAt();
+      let nextChar = grid[i + 1][j].charCodeAt();
+      if (nextChar < currentChar) {
+        return "NO";
+      }
+    }
+  }
+  return "YES";
+}
+const grid = ["abc", "hjk", "mpq", "rtv"];
+console.log(gridChallenge(grid));
 
 // PRIME DATES
 
