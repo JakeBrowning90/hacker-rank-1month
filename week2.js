@@ -191,29 +191,47 @@
 
 // GRID CHALLENGE (given array of lower-case letter strings of equal length, sort strings into alphabetized rows, then determine if columns are alphabetical.)
 // NOTE: Problem description says "Square grid", but actually provides array of strings, with string length not always equal to array length)
-function gridChallenge(grid) {
-  // Convert each string ("row") into alphabetically sorted array)
-  for (let i = 0; i < grid.length; i++) {
-    grid[i] = grid[i].split("").sort();
-  }
-  // Iterate through all but last row. If char code in next row, same column is lesser, return "NO". Else return "YES"
-  for (let i = 0; i < grid.length - 1; i++) {
-    for (let j = 0; j < grid[i].length; j++) {
-      let currentChar = grid[i][j].charCodeAt();
-      let nextChar = grid[i + 1][j].charCodeAt();
-      if (nextChar < currentChar) {
-        return "NO";
-      }
-    }
-  }
-  return "YES";
-}
-const grid = ["abc", "hjk", "mpq", "rtv"];
-console.log(gridChallenge(grid));
+// function gridChallenge(grid) {
+//   // Convert each string ("row") into alphabetically sorted array)
+//   for (let i = 0; i < grid.length; i++) {
+//     grid[i] = grid[i].split("").sort();
+//   }
+//   // Iterate through all but last row. If char code in next row, same column is lesser, return "NO". Else return "YES"
+//   for (let i = 0; i < grid.length - 1; i++) {
+//     for (let j = 0; j < grid[i].length; j++) {
+//       let currentChar = grid[i][j].charCodeAt();
+//       let nextChar = grid[i + 1][j].charCodeAt();
+//       if (nextChar < currentChar) {
+//         return "NO";
+//       }
+//     }
+//   }
+//   return "YES";
+// }
+// const grid = ["abc", "hjk", "mpq", "rtv"];
+// console.log(gridChallenge(grid));
 
 // PRIME DATES (Code not present in JS, corrections required in Leap Year if-statement, multiplying X to concat MM and YYYY, X%4 OR X%7, and set month counter to 1 after 12)
 
 // SHERLOCK AND ARRAY
+// Faster than iterating through array and reducing slices!
+function balancedSums(arr) {
+  // Set left and right sums as 0 and total of array
+  let leftSum = 0;
+  let rightSum = arr.reduce((a, b) => a + b, 0);
+  // Check if leftSum equals rightSum - current index, array meets condition. If not, add index to left and subtract from right.
+  for (let i = 0; i < arr.length; i++) {
+    if (leftSum == rightSum - arr[i]) {
+      return "YES";
+    } else {
+      leftSum = leftSum + arr[i];
+      rightSum = rightSum - arr[i];
+    }
+  }
+  return "NO";
+}
+const arr = [5, 6, 8, 11];
+console.log(balancedSums(arr));
 
 // RECURSIVE DIGIT SUM
 
