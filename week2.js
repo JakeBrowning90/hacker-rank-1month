@@ -215,28 +215,53 @@
 
 // SHERLOCK AND ARRAY
 // Faster than iterating through array and reducing slices!
-function balancedSums(arr) {
-  // Set left and right sums as 0 and total of array
-  let leftSum = 0;
-  let rightSum = arr.reduce((a, b) => a + b, 0);
-  // Check if leftSum equals rightSum - current index, array meets condition. If not, add index to left and subtract from right.
-  for (let i = 0; i < arr.length; i++) {
-    if (leftSum == rightSum - arr[i]) {
-      return "YES";
-    } else {
-      leftSum = leftSum + arr[i];
-      rightSum = rightSum - arr[i];
-    }
-  }
-  return "NO";
-}
-const arr = [5, 6, 8, 11];
-console.log(balancedSums(arr));
+// function balancedSums(arr) {
+//   // Set left and right sums as 0 and total of array
+//   let leftSum = 0;
+//   let rightSum = arr.reduce((a, b) => a + b, 0);
+//   // Check if leftSum equals rightSum - current index, array meets condition. If not, add index to left and subtract from right.
+//   for (let i = 0; i < arr.length; i++) {
+//     if (leftSum == rightSum - arr[i]) {
+//       return "YES";
+//     } else {
+//       leftSum = leftSum + arr[i];
+//       rightSum = rightSum - arr[i];
+//     }
+//   }
+//   return "NO";
+// }
+// const arr = [5, 6, 8, 11];
+// console.log(balancedSums(arr));
 
-// RECURSIVE DIGIT SUM
+// RECURSIVE DIGIT SUM (Get super digit of integer (n concat k times): find sum of digits, repeat until single digit)
+function superDigit(n, k) {
+  // Super digit found
+  if (n.length == 1) {
+    return n;
+  }
+  // Get sum of all digits in string, multiplied by k to account for 1st time concatenation
+  let sum = 0;
+  for (const digit of n) {
+    sum += Number(digit) * k;
+  }
+  // Run result recursively with concatenation multiplier of 1 (non-factor)
+  return superDigit(sum.toString(), 1);
+}
+const n = "123";
+const k = 3;
+console.log(superDigit(n, k));
 
 // COUNTER GAME
 
 // SUM VS XOR
 
 // MOCK TEST
+
+// function staircase(n) {
+//   for (let i = 1; i <= n; i++) {
+//     let string = " ".repeat(n-i) + "#".repeat(i);
+//     console.log(string);
+//   }
+// }
+// const n = 6;
+// staircase(n);

@@ -77,6 +77,13 @@
 //   //   Return sum - max and sum - min
 //   console.log(sum - max + " " + (sum - min));
 // }
+// function miniMaxSum(arr) {
+//   arr.sort((a, b) => a + b);
+//   let min = Math.min(...arr);
+//   let max = Math.max(...arr);
+//   let total = arr.reduce((a, b) => a + b, 0);
+//   console.log(total - max + " " + (total - min));
+// }
 
 // const arr = [1, 3, 5, 7, 9];
 // miniMaxSum(arr);
