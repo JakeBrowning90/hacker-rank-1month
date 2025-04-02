@@ -282,21 +282,37 @@
 // console.log(superDigit(n, k));
 
 // COUNTER GAME
-function counterGame(n) {
-  let turn = 0;
-  while (n > 1) {
-    // If log2(n) % 1 == 0, n is a power of 2 so divide by 2. Else, subtract the nearest lower power of 2 (using Math.floor to round down to whole number)
-    n =
-      Math.log2(n) % 1 == 0 ? n / 2 : n - Math.pow(2, Math.floor(Math.log2(n)));
-    turn++;
-  }
-  // Louise wins if turn count is odd, Richard wins if even (including zero)
-  return turn % 2 == 0 ? "Richard" : "Louise";
-}
-const n = 4;
-console.log(counterGame(n));
+// function counterGame(n) {
+//   let turn = 0;
+//   while (n > 1) {
+//     // If log2(n) % 1 == 0, n is a power of 2 so divide by 2. Else, subtract the nearest lower power of 2 (using Math.floor to round down to whole number)
+//     n =
+//       Math.log2(n) % 1 == 0 ? n / 2 : n - Math.pow(2, Math.floor(Math.log2(n)));
+//     turn++;
+//   }
+//   // Louise wins if turn count is odd, Richard wins if even (including zero)
+//   return turn % 2 == 0 ? "Richard" : "Louise";
+// }
+// const n = 4;
+// console.log(counterGame(n));
 
-// SUM VS XOR
+// SUM VS XOR (for integer n, return each x where n+x = n^x (XOR operator))
+function sumXor(n) {
+  // Faster than iterating through n + i == n ^ i
+  // If n is zero, return 1. Else get the number of zeros in n's binary form, raise 2 to that number.
+  return n == 0
+    ? 1
+    : Math.pow(
+        2,
+        n
+          .toString(2)
+          .split("")
+          .filter((bit) => bit == "0").length
+      );
+}
+
+const n = 0;
+console.log(sumXor(n));
 
 // MOCK TEST
 
