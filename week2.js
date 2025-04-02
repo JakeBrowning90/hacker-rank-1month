@@ -188,36 +188,36 @@
 // console.log(maxMin(k, arr));
 
 // DYNAMIC ARRAY (empty 2D array of length n, and iterate through array of 3-digit string queries encoded as Type,X,Y)
-function dynamicArray(n, queries) {
-  // Create empty 2D array of n length, set lastAnswer and answers array
-  let arr = [];
-  for (let i = 0; i < n; i++) {
-    arr[i] = [];
-  }
-  let lastAnswer = 0;
-  let answers = [];
+// function dynamicArray(n, queries) {
+//   // Create empty 2D array of n length, set lastAnswer and answers array
+//   let arr = [];
+//   for (let i = 0; i < n; i++) {
+//     arr[i] = [];
+//   }
+//   let lastAnswer = 0;
+//   let answers = [];
 
-  // Get each query's type, x, and y. Set idx using provided formula and branching operations based on problem description
-  for (let i = 0; i < queries.length; i++) {
-    let type = parseInt(queries[i][0]);
-    let x = parseInt(queries[i][1]);
-    let y = parseInt(queries[i][2]);
+//   // Get each query's type, x, and y. Set idx using provided formula and branching operations based on problem description
+//   for (let i = 0; i < queries.length; i++) {
+//     let type = parseInt(queries[i][0]);
+//     let x = parseInt(queries[i][1]);
+//     let y = parseInt(queries[i][2]);
 
-    let idx = (x ^ lastAnswer) % n;
+//     let idx = (x ^ lastAnswer) % n;
 
-    if (type == 1) {
-      arr[idx].push(y);
-    } else if (type == 2) {
-      lastAnswer = arr[idx][y % arr[idx].length];
-      answers.push(lastAnswer);
-    }
-  }
+//     if (type == 1) {
+//       arr[idx].push(y);
+//     } else if (type == 2) {
+//       lastAnswer = arr[idx][y % arr[idx].length];
+//       answers.push(lastAnswer);
+//     }
+//   }
 
-  return answers;
-}
-const n = 2;
-const queries = ["105", "117", "103", "210", "211"];
-console.log(dynamicArray(n, queries));
+//   return answers;
+// }
+// const n = 2;
+// const queries = ["105", "117", "103", "210", "211"];
+// console.log(dynamicArray(n, queries));
 
 // GRID CHALLENGE (given array of lower-case letter strings of equal length, sort strings into alphabetized rows, then determine if columns are alphabetical.)
 // NOTE: Problem description says "Square grid", but actually provides array of strings, with string length not always equal to array length)
@@ -282,6 +282,19 @@ console.log(dynamicArray(n, queries));
 // console.log(superDigit(n, k));
 
 // COUNTER GAME
+function counterGame(n) {
+  let turn = 0;
+  while (n > 1) {
+    // If log2(n) % 1 == 0, n is a power of 2 so divide by 2. Else, subtract the nearest lower power of 2 (using Math.floor to round down to whole number)
+    n =
+      Math.log2(n) % 1 == 0 ? n / 2 : n - Math.pow(2, Math.floor(Math.log2(n)));
+    turn++;
+  }
+  // Louise wins if turn count is odd, Richard wins if even (including zero)
+  return turn % 2 == 0 ? "Richard" : "Louise";
+}
+const n = 4;
+console.log(counterGame(n));
 
 // SUM VS XOR
 
