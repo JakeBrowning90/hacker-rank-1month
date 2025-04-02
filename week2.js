@@ -187,7 +187,37 @@
 // k = 4;
 // console.log(maxMin(k, arr));
 
-// DYNAMIC ARRAY
+// DYNAMIC ARRAY (empty 2D array of length n, and iterate through array of 3-digit string queries encoded as Type,X,Y)
+function dynamicArray(n, queries) {
+  // Create empty 2D array of n length, set lastAnswer and answers array
+  let arr = [];
+  for (let i = 0; i < n; i++) {
+    arr[i] = [];
+  }
+  let lastAnswer = 0;
+  let answers = [];
+
+  // Get each query's type, x, and y. Set idx using provided formula and branching operations based on problem description
+  for (let i = 0; i < queries.length; i++) {
+    let type = parseInt(queries[i][0]);
+    let x = parseInt(queries[i][1]);
+    let y = parseInt(queries[i][2]);
+
+    let idx = (x ^ lastAnswer) % n;
+
+    if (type == 1) {
+      arr[idx].push(y);
+    } else if (type == 2) {
+      lastAnswer = arr[idx][y % arr[idx].length];
+      answers.push(lastAnswer);
+    }
+  }
+
+  return answers;
+}
+const n = 2;
+const queries = ["105", "117", "103", "210", "211"];
+console.log(dynamicArray(n, queries));
 
 // GRID CHALLENGE (given array of lower-case letter strings of equal length, sort strings into alphabetized rows, then determine if columns are alphabetical.)
 // NOTE: Problem description says "Square grid", but actually provides array of strings, with string length not always equal to array length)
@@ -234,22 +264,22 @@
 // console.log(balancedSums(arr));
 
 // RECURSIVE DIGIT SUM (Get super digit of integer (n concat k times): find sum of digits, repeat until single digit)
-function superDigit(n, k) {
-  // Super digit found
-  if (n.length == 1) {
-    return n;
-  }
-  // Get sum of all digits in string, multiplied by k to account for 1st time concatenation
-  let sum = 0;
-  for (const digit of n) {
-    sum += Number(digit) * k;
-  }
-  // Run result recursively with concatenation multiplier of 1 (non-factor)
-  return superDigit(sum.toString(), 1);
-}
-const n = "123";
-const k = 3;
-console.log(superDigit(n, k));
+// function superDigit(n, k) {
+//   // Super digit found
+//   if (n.length == 1) {
+//     return n;
+//   }
+//   // Get sum of all digits in string, multiplied by k to account for 1st time concatenation
+//   let sum = 0;
+//   for (const digit of n) {
+//     sum += Number(digit) * k;
+//   }
+//   // Run result recursively with concatenation multiplier of 1 (non-factor)
+//   return superDigit(sum.toString(), 1);
+// }
+// const n = "123";
+// const k = 3;
+// console.log(superDigit(n, k));
 
 // COUNTER GAME
 
