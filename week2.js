@@ -297,24 +297,92 @@
 // console.log(counterGame(n));
 
 // SUM VS XOR (for integer n, return each x where n+x = n^x (XOR operator))
-function sumXor(n) {
-  // Faster than iterating through n + i == n ^ i
-  // If n is zero, return 1. Else get the number of zeros in n's binary form, raise 2 to that number.
-  return n == 0
-    ? 1
-    : Math.pow(
-        2,
-        n
-          .toString(2)
-          .split("")
-          .filter((bit) => bit == "0").length
-      );
-}
+// function sumXor(n) {
+// Faster than iterating through n + i == n ^ i
+// If n is zero, return 1. Else get the number of zeros in n's binary form, raise 2 to that number.
+//   return n == 0
+//     ? 1
+//     : Math.pow(
+//         2,
+//         n
+//           .toString(2)
+//           .split("")
+//           .filter((bit) => bit == "0").length
+//       );
+// }
 
-const n = 0;
-console.log(sumXor(n));
+// const n = 0;
+// console.log(sumXor(n));
 
 // MOCK TEST
+// 1. PALINDROME INDEX
+function palindromeIndex(s) {
+  s = s.split("");
+  if (s.toString() === s.toReversed().toString()) {
+    return -1;
+  }
+  for (let i = 0; i < s.length; i++) {
+    let leftSide = s.slice(0, i);
+    let rightSide = s.slice(i + 1, s.length);
+    let sliced = leftSide.concat(rightSide);
+    let reversed = sliced.toReversed();
+    // console.log(sliced, reversed);
+    if (sliced.toString() === reversed.toString()) {
+      return i;
+    }
+  }
+  return -1;
+}
+const s = "bcbc";
+console.log(palindromeIndex(s));
+
+// 2. BETWEEN TWO SETS
+// function getTotalX(a, b) {
+//   console.log(b[0]);
+//   let factors = [];
+//   for (let i = 0; i <= b[0]; i++) {
+//     if (b[0] % i == 0) {
+//       factors.push(i);
+//     }
+//   }
+//   console.log(factors);
+//   let counter = 0;
+//   for (let j = 0; j < factors.length; j++) {
+//     const areFactors = (value) => factors[j] % value == 0;
+//     const isMultiple = (value) => value % factors[j] == 0;
+
+//     if (a.every(areFactors) && b.every(isMultiple)) {
+//       console.log(factors[j]);
+//       counter++;
+//     }
+//   }
+//   return counter;
+// }
+// const a = [2, 4];
+// const b = [16, 32, 96];
+// console.log(getTotalX(a, b));
+
+// 3. ANAGRAM
+// function anagram(s) {
+//   if (s.length % 2 != 0) {
+//     return -1;
+//   }
+//   let string = s.split("");
+//   // console.log(string);
+//   let left = string.slice(0, string.length / 2).sort();
+//   let right = string.slice(string.length / 2, string.length).sort();
+//   // console.log(left);
+//   // console.log(right);
+//   let counter = 0;
+//   for (let i = 0; i < left.length; i++) {
+//     if (left[i] != right[i]) {
+//       counter++;
+//     }
+//   }
+//   return counter;
+// }
+// const s = "xyyx";
+// console.log(anagram(s));
 
 // function staircase(n) {
 //   for (let i = 1; i <= n; i++) {
