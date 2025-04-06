@@ -317,23 +317,41 @@
 // MOCK TEST
 // 1. PALINDROME INDEX
 function palindromeIndex(s) {
-  s = s.split("");
-  if (s.toString() === s.toReversed().toString()) {
+  // Declare nested function:
+  const remainingChars = (s, left, right) => {
+    while (left < right) {
+      if (s.charAt(left) !== s.charAt(right)) {
+        return false;
+      }
+      left++;
+      right--;
+    }
+    return true;
+  };
+
+  // String with length 1 is automatically a palindrome
+  if (s.length == 1) {
     return -1;
   }
-  for (let i = 0; i < s.length; i++) {
-    let leftSide = s.slice(0, i);
-    let rightSide = s.slice(i + 1, s.length);
-    let sliced = leftSide.concat(rightSide);
-    let reversed = sliced.toReversed();
-    // console.log(sliced, reversed);
-    if (sliced.toString() === reversed.toString()) {
-      return i;
+  // Iterate beginning and end chars, meet in middle of string
+  let left = 0;
+  let right = s.length - 1;
+  while (left < right) {
+    // If chars don't match, check remaining chars (minus left) for matches to determine if omitting left creates a palindrome
+    if (s.charAt(left) !== s.charAt(right)) {
+      if (remainingChars(s, left + 1, right)) {
+        return left;
+      } else {
+        return right;
+      }
     }
+    left++;
+    right--;
   }
+  // No mismatching chars found, string is already palindrome
   return -1;
 }
-const s = "bcbc";
+const s = "cabc";
 console.log(palindromeIndex(s));
 
 // 2. BETWEEN TWO SETS
