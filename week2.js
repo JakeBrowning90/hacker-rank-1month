@@ -316,61 +316,53 @@
 
 // MOCK TEST
 // 1. PALINDROME INDEX
-function palindromeIndex(s) {
-  // Declare nested function:
-  const remainingChars = (s, left, right) => {
-    while (left < right) {
-      if (s.charAt(left) !== s.charAt(right)) {
-        return false;
-      }
-      left++;
-      right--;
-    }
-    return true;
-  };
-
-  // String with length 1 is automatically a palindrome
-  if (s.length == 1) {
-    return -1;
-  }
-  // Iterate beginning and end chars, meet in middle of string
-  let left = 0;
-  let right = s.length - 1;
-  while (left < right) {
-    // If chars don't match, check remaining chars (minus left) for matches to determine if omitting left creates a palindrome
-    if (s.charAt(left) !== s.charAt(right)) {
-      if (remainingChars(s, left + 1, right)) {
-        return left;
-      } else {
-        return right;
-      }
-    }
-    left++;
-    right--;
-  }
-  // No mismatching chars found, string is already palindrome
-  return -1;
-}
-const s = "cabc";
-console.log(palindromeIndex(s));
-
-// 2. BETWEEN TWO SETS
-// function getTotalX(a, b) {
-//   console.log(b[0]);
-//   let factors = [];
-//   for (let i = 0; i <= b[0]; i++) {
-//     if (b[0] % i == 0) {
-//       factors.push(i);
+// function palindromeIndex(s) {
+//   // Declare nested function:
+//   const remainingChars = (s, left, right) => {
+//     while (left < right) {
+//       if (s.charAt(left) !== s.charAt(right)) {
+//         return false;
+//       }
+//       left++;
+//       right--;
 //     }
-//   }
-//   console.log(factors);
-//   let counter = 0;
-//   for (let j = 0; j < factors.length; j++) {
-//     const areFactors = (value) => factors[j] % value == 0;
-//     const isMultiple = (value) => value % factors[j] == 0;
+//     return true;
+//   };
 
-//     if (a.every(areFactors) && b.every(isMultiple)) {
-//       console.log(factors[j]);
+//   // String with length 1 is automatically a palindrome
+//   if (s.length == 1) {
+//     return -1;
+//   }
+//   // Iterate beginning and end chars, meet in middle of string
+//   let left = 0;
+//   let right = s.length - 1;
+//   while (left < right) {
+//     // If chars don't match, check remaining chars (minus left) for matches to determine if omitting left creates a palindrome
+//     if (s.charAt(left) !== s.charAt(right)) {
+//       if (remainingChars(s, left + 1, right)) {
+//         return left;
+//       } else {
+//         return right;
+//       }
+//     }
+//     left++;
+//     right--;
+//   }
+//   // No mismatching chars found, string is already palindrome
+//   return -1;
+// }
+// const s = "cabc";
+// console.log(palindromeIndex(s));
+
+// 2. BETWEEN TWO SETS (given arrays of ints a and b, return the number of integers of which all of a are factors, and which themselves are factors to all of b)
+// function getTotalX(a, b) {
+//   // Set counter at 0, get max from a and min from b for range on integers to test.
+//   let counter = 0;
+//   let start = Math.max(...a);
+//   let end = Math.min(...b);
+//   for (let i = start; i <= end; i++) {
+//     // Check if int is a multiple of all values in a, and a factor of all values in b. Add 1 to counter if true.
+//     if (a.every((j) => i % j == 0) && b.every((k) => k % i == 0)) {
 //       counter++;
 //     }
 //   }
@@ -381,26 +373,36 @@ console.log(palindromeIndex(s));
 // console.log(getTotalX(a, b));
 
 // 3. ANAGRAM
-// function anagram(s) {
-//   if (s.length % 2 != 0) {
-//     return -1;
-//   }
-//   let string = s.split("");
-//   // console.log(string);
-//   let left = string.slice(0, string.length / 2).sort();
-//   let right = string.slice(string.length / 2, string.length).sort();
-//   // console.log(left);
-//   // console.log(right);
-//   let counter = 0;
-//   for (let i = 0; i < left.length; i++) {
-//     if (left[i] != right[i]) {
-//       counter++;
-//     }
-//   }
-//   return counter;
-// }
-// const s = "xyyx";
-// console.log(anagram(s));
+function anagram(s) {
+  // Return -1 is string has odd number of chars
+  if (s.length % 2 != 0) {
+    return -1;
+  }
+  // Get midpoint of string length
+  let midPoint = s.length / 2;
+  // Declare array of 26 zeros to track letter frequency.
+  let letterFreq = [];
+  for (let i = 0; i < 26; i++) {
+    letterFreq[i] = 0;
+  }
+  // Iterate though 1st and 2nd half of string. 
+  // For each char in 1st half, add 1 to array. 
+  // For each char in 2nd half, subtract 1. Chars with equal presence will balance to zero! 
+  for (let i = 0; i < midPoint; i++) {
+    letterFreq[s.charAt(i).charCodeAt() - 97]++;
+    letterFreq[s.charAt(i + midPoint).charCodeAt() - 97]--;
+  }
+  // Count the total (either positive or negative) of letters which were not balanced.
+  let counter = 0;
+  for (let i = 0; i < letterFreq.length; i++) {
+    if (letterFreq[i] > 0) {
+      counter += letterFreq[i];
+    }
+  }
+  return counter;
+}
+const s = "abccde";
+console.log(anagram(s));
 
 // function staircase(n) {
 //   for (let i = 1; i <= n; i++) {
