@@ -315,7 +315,7 @@
 // console.log(sumXor(n));
 
 // MOCK TEST
-// 1. PALINDROME INDEX
+// 1. PALINDROME INDEX (given string of lowercase letters, return index of letter to remove to make the string a palindrome)
 // function palindromeIndex(s) {
 //   // Declare nested function:
 //   const remainingChars = (s, left, right) => {
@@ -372,7 +372,7 @@
 // const b = [16, 32, 96];
 // console.log(getTotalX(a, b));
 
-// 3. ANAGRAM
+// 3. ANAGRAM (given string of lowercase letters, return the minimum number of chars to change to the 1st and 2nd half of the string are anagrams of each other)
 function anagram(s) {
   // Return -1 is string has odd number of chars
   if (s.length % 2 != 0) {
